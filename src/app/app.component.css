@@ -1,0 +1,8 @@
+.active {
+    background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 4%, rgba(223,177,207,1) 29%, rgba(212,179,211,1) 54%, rgba(234,175,203,1) 62%, rgba(148,187,233,1) 94%);
+}
+.active span{
+    color: rgb(20, 20, 15);
+    font-weight: 500;
+}
