@@ -1,88 +1,97 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { unitService } from 'src/app/Services/unit/unit.service';
+import { ClientService } from 'src/app/Services/Client/client.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-unit',
-  templateUrl: './unit.component.html',
-  styleUrls: ['./unit.component.css']
+  selector: 'app-client',
+  templateUrl: './client.component.html',
+  styleUrls: ['./client.component.css']
 })
-export class UnitComponent implements OnInit {
+export class ClientComponent implements OnInit {
 
- 
-  constructor(private serv:unitService) { 
+  constructor(private serv:ClientService) { 
     
   }
 
 // --------------------------------------------------Validation--------------------------------------------//
 
 form = new FormGroup({
-  namevalidate : new FormControl('',
-    Validators.required,),
+  namevalidate : new FormControl('',Validators.required,),
+  phonevalidate : new FormControl('',Validators.required,),
+  addressvalidate : new FormControl('',Validators.required,),
+  // namevalidate : new FormControl('',Validators.required,),
+
   // nameuniqe : new FormControl(null,Validators.),
-  notevalidate : new FormControl(null),
+  idvalidate : new FormControl(null),
 })
 isclick = false
 
 // ------------------------------------------------------------------------------------------------------//
   
   // --------------------------------------------------Vars--------------------------------------------//
-  unitist!:Observable<any[]>;
-  company:any;
+  clientist!: Observable<any[]>;
+  client:any;
+  clientnumber!: number;
   name:string="";
-  notes:string="";
-  id!: number;
+  phone:string|number="";
+  address:string="";
   // ----------------------------------------------------------------------------------------------//
   
 
 
   ngOnInit(): void {
-    this.unitist=this.serv.getunitlist();
-    
+    this.clientist=this.serv.getclientlist();
+    this.serv.getclientlist().subscribe(
+      clinumber => {
+        this.clientnumber = clinumber.length > 0 ? clinumber.reduce((a: { id: number; },b: { id: number; }) => a.id > b.id ? a: b).id + 1 : 1000
+      });
     
   }
 
 // ---------------------------------------Cancel Add Company-----------------------------------//
 
   cancel(){
-    this.name=""
-    this.notes=""
-  }
+    this.form.reset()
+    }
   // --------------------------------------------------------------------------------------------//
 
 
   // ---------------------------------------Add Company-----------------------------------//
-  addunits(){
-    var unit ={
+  addclients(){
+    var client ={
       name:this.name,
-      notes:this.notes
+      phone:this.phone,
+      id:this.clientnumber,
+      address:this.address
     }
-    this.company=this.serv.addunit(unit).subscribe(()=>{
+    this.client=this.serv.addclient(client).subscribe(()=>{
       Swal.fire({
-        text: "Unit Recorded",
+        text: "client Recorded",
         icon: 'success',
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'OK'
       }).then((result) => {
         if (result.isConfirmed) {
- 
-          this.name="";
-          this.notes="";
           this.form.reset();
-          this.unitist=this.serv.getunitlist();
+          this.serv.getclientlist().subscribe(
+            clinumber => {
+              this.clientnumber = clinumber.length > 0 ? clinumber.reduce((a: { id: number; },b: { id: number; }) => a.id > b.id ? a: b).id + 1 : 1000
+            });
+          this.clientist=this.serv.getclientlist();
         }
       })    
     });
   }
+
   // ------------------------------------------------------------------------------------//
   
 
 
   // ---------------------------------------Delete Company-------------------------------//
 
-  deleteunits(item:any){
+  deleteclients(item:any){
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -93,12 +102,12 @@ isclick = false
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.unitist=this.serv.getunitlist();
-                this.company=item;
-                this.company=this.serv.deleteunit(item).subscribe();
+          this.clientist=this.serv.getclientlist();
+                this.client=item;
+                this.client=this.serv.deleteclient(item).subscribe();
           Swal.fire(
             'Deleted!',
-            'Your file has been deleted.',
+            'Your Recorded has been deleted.',
             'success'
           )
 

@@ -9,7 +9,10 @@ import{HttpClientModule} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './Components/home/home.component';
 import { CompanyService } from './Services/Company/company.service';
-import { UnitService } from './Services/unit/unit.service';
+import { TypeComponent } from './Components/type/type.component';
+import { ClientComponent } from './Components/client/client.component';
+import { ClientService } from './Services/Client/client.service';
+import { TypeService } from './Services/Type/type.service';
 
 
 @NgModule({
@@ -17,7 +20,9 @@ import { UnitService } from './Services/unit/unit.service';
     AppComponent,
     CompanyDataComponent,
     UnitComponent,
-    HomeComponent
+    HomeComponent,
+    TypeComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,9 @@ import { UnitService } from './Services/unit/unit.service';
   ],
   providers: [
     CompanyService,
-    UnitService
+    TypeService,
+    ClientService,
+    
   ],
   bootstrap: [AppComponent]
 })

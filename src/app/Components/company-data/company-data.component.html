@@ -11,12 +11,14 @@
                 </div>
                 <div class="card-body">
                     <div class="px-3">
-                        <form class="form form-horizontal">
-                        
+                        <form class="form form-horizontal" [formGroup]="form">
+                         
                 <div class="form-group row">
                                     <label class="col-md-3 label-control" for="projectinput9">Company Name : </label>
                                     <div class="col-md-9">
-                                        <input type="text" id="projectinput9" class="form-control" name="Type" [(ngModel)]="name">
+                                        <input type="text" id="name" class="form-control" name="Type" [(ngModel)]="name" formControlName="namevalidate">
+                                        <span class="alert alert-danger"*ngIf="(form.get('namevalidate')?.touched && form.get('namevalidate')?.hasError('required')) || (form.get('namevalidate')?.hasError('required') && isclick )">Company name required</span>
+                                        <!-- <span class="alert alert-danger" *ngIf="(form.get('namevalidate')?.touched && form.get('namevalidate')?.hasError('exists')) || (form.get('namevalidate')?.hasError('exists') && isclick)">Company name exists</span> -->
                                     </div>
                                 </div>
              
@@ -27,7 +29,8 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 label-control" for="projectinput9">Notes: </label>
                                     <div class="col-md-9">
-                                        <textarea id="projectinput9" rows="5" class="form-control" name="comment"[(ngModel)]="notes"></textarea>
+                                        <textarea id="notes" rows="5" class="form-control" name="comment"[(ngModel)]="notes" formControlName="notevalidate"></textarea>
+                                        <!-- <span *ngIf="form.get('namevalidate')?.touched && form.get('namevalidate')?.invalid" class="alert alert-danger">Name Required</span> -->
                                     </div>
                                 </div>
                             </form></div>

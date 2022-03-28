@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {  Observable } from 'rxjs';
 import { CompanyService } from 'src/app/Services/Company/company.service';
 import Swal from 'sweetalert2';
 
@@ -16,14 +17,27 @@ export class CompanyDataComponent implements OnInit {
   }
 
 
+
+// --------------------------------------------------Validation--------------------------------------------//
+
+  form = new FormGroup({
+    namevalidate : new FormControl('',
+      Validators.required,),
+    // nameuniqe : new FormControl(null,Validators.),
+    notevalidate : new FormControl(null),
+  })
+  isclick = false
+
+  // ------------------------------------------------------------------------------------------------------//
+
   
-  // --------------------------------------------------Vars--------------------------------------------//
+  // --------------------------------------------------Vars------------------------------------------------//
   companylist!:Observable<any[]>;
   company:any;
   name:string="";
   notes:string="";
   id!: number;
-  // ----------------------------------------------------------------------------------------------//
+  // ------------------------------------------------------------------------------------------------------//
   
 
 
@@ -33,16 +47,16 @@ export class CompanyDataComponent implements OnInit {
     
   }
 
-// ---------------------------------------Cancel Add Company-----------------------------------//
+// -------------------------------------------------Cancel Add Company-------------------------------------//
 
   cancel(){
     this.name=""
     this.notes=""
   }
-  // --------------------------------------------------------------------------------------------//
+  // ------------------------------------------------------------------------------------------------------//
 
 
-  // ---------------------------------------Add Company-----------------------------------//
+  // ----------------------------------------------Add Company--------------------------------------------//
   addcompany(){
     var comp ={
       name:this.name,
@@ -59,16 +73,18 @@ export class CompanyDataComponent implements OnInit {
  
           this.name="";
           this.notes="";
-          this.companylist=this.serv.getcompanylist();
+          this.form.reset();
+          this.companylist=this.serv.getcompanylist();        
+
         }
       })    
     });
   }
-  // ------------------------------------------------------------------------------------//
+  // ----------------------------------------------------------------------------------------------------//
   
 
 
-  // ---------------------------------------Delete Company-------------------------------//
+  // ---------------------------------------Delete Company----------------------------------------------//
 
   deletecomp(item:any){
       Swal.fire({
@@ -95,6 +111,19 @@ export class CompanyDataComponent implements OnInit {
       })
     }
   // -----------------------------------------------------------------------------------------//
+
+
+  // companylistt: CompanyService[] = [];
+
+  // nameIsUnique(control: FormControl) : {[msg: string]: boolean} {
+  //   for (let company of this.companylistt){
+  //     if (company.name.toLowerCase() === control.value?.toLowerCase())
+  //       return {'exists': true}
+  //   }
+  //   return null;
+  // }
+
+
 
   }
 

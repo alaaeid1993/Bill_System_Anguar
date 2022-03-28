@@ -1,0 +1,104 @@
+<section id="horizontal-form-layouts">
+                   
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title" id="horz-layout-basic">Clients</h4>
+                    </div>
+                    <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
+                </div>
+                <div class="card-body">
+                    <div class="px-3">
+                        <form class="form form-horizontal"[formGroup]="form">
+                         
+                               <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="projectinput9">Client Name : </label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="name" class="form-control" name="name"[(ngModel)]="name" formControlName="namevalidate">
+                                        <span class="alert alert-danger"*ngIf="(form.get('namevalidate')?.touched && form.get('namevalidate')?.hasError('required')) || (form.get('namevalidate')?.hasError('required') && isclick )">Client name required</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="projectinput9">Phone  : </label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="phone" class="form-control" name="phone"[(ngModel)]="phone" formControlName="phonevalidate">
+                                        <span class="alert alert-danger"*ngIf="(form.get('phonevalidate')?.touched && form.get('phonevalidate')?.hasError('required')) || (form.get('phonevalidate')?.hasError('required') && isclick )">Phone required</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="projectinput9">Number : </label>
+                                    <div class="col-md-9">
+                                        <input type="text"  id="id" class="form-control" readonly [value]="clientnumber" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="projectinput9">Address: </label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="address" class="form-control" name="address"[(ngModel)]="address" formControlName="addressvalidate">
+                                        <span class="alert alert-danger"*ngIf="(form.get('addressvalidate')?.touched && form.get('addressvalidate')?.hasError('required')) || (form.get('addressvalidate')?.hasError('required') && isclick )"> Adrress required</span>
+                                    </div>
+                                </div>
+             
+               
+                                    
+                                  
+
+                            </form></div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-danger mr-1"(click)="cancel()">
+                                    <i class="icon-trash"></i> Cancel
+                                </button>
+                                <button type="button" class="btn btn-success" (click)="addclients()">
+                                    <i class="icon-note"></i> Save
+                                </button>
+                            </div>
+                        
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+
+    <!-- ---------------------------------------------- -->
+
+    <table  class="table table-danger" style="text-align: center;">
+        <thead >
+          <tr >
+            <th scope="col">Client Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Client Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Option</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of clientist|async">
+            <td  class="table-info">{{i.name}}</td>
+            <td class="table-info">{{i.phone}}</td>
+            <td class="table-info">{{i.id}}</td>
+            <td class="table-info">{{i.address}}</td>
+
+            <td  class="table-info"(click)="deleteclients(i.id)">
+                <i class="icon-trash" style="color: brown;cursor: pointer;"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
+
+
+
+
+

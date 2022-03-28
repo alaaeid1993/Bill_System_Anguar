@@ -1,65 +1,72 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { unitService } from 'src/app/Services/unit/unit.service';
+import { CompanyService } from 'src/app/Services/Company/company.service';
+import { TypeService } from 'src/app/Services/Type/type.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-unit',
-  templateUrl: './unit.component.html',
-  styleUrls: ['./unit.component.css']
+  selector: 'app-type',
+  templateUrl: './type.component.html',
+  styleUrls: ['./type.component.css']
 })
-export class UnitComponent implements OnInit {
+export class TypeComponent implements OnInit {
 
  
-  constructor(private serv:unitService) { 
+  constructor(private serv:TypeService, private comser:CompanyService) { 
     
   }
 
 // --------------------------------------------------Validation--------------------------------------------//
 
 form = new FormGroup({
-  namevalidate : new FormControl('',
-    Validators.required,),
-  // nameuniqe : new FormControl(null,Validators.),
+  companyvalidate : new FormControl('',Validators.required,),
+  spiecevalidate : new FormControl('',Validators.required,),
   notevalidate : new FormControl(null),
+
 })
 isclick = false
 
 // ------------------------------------------------------------------------------------------------------//
   
-  // --------------------------------------------------Vars--------------------------------------------//
-  unitist!:Observable<any[]>;
-  company:any;
+// --------------------------------------------------Vars--------------------------------------------//
+typelist!:Observable<any[]>;
+companies:any;
+  type:any;
+  companyname:any;
   name:string="";
-  notes:string="";
-  id!: number;
+  notes:string=""
+ 
   // ----------------------------------------------------------------------------------------------//
   
 
 
   ngOnInit(): void {
-    this.unitist=this.serv.getunitlist();
-    
+    this.typelist=this.serv.gettypelist();
+    this.companyname=this.comser.getcompanylist().subscribe(
+      data => this.companies=data)
+    this.comser.getcompanylist().subscribe(
+      data => this.companies=data
+    )
     
   }
 
 // ---------------------------------------Cancel Add Company-----------------------------------//
 
   cancel(){
-    this.name=""
-    this.notes=""
+this.form.reset();
   }
   // --------------------------------------------------------------------------------------------//
 
 
   // ---------------------------------------Add Company-----------------------------------//
-  addunits(){
-    var unit ={
+  addtype(){
+    var type ={
+      companyname:this.companyname,
       name:this.name,
       notes:this.notes
     }
-    this.company=this.serv.addunit(unit).subscribe(()=>{
+    this.type=this.serv.addtype(type).subscribe(()=>{
       Swal.fire({
         text: "Unit Recorded",
         icon: 'success',
@@ -68,10 +75,8 @@ isclick = false
       }).then((result) => {
         if (result.isConfirmed) {
  
-          this.name="";
-          this.notes="";
           this.form.reset();
-          this.unitist=this.serv.getunitlist();
+          this.typelist=this.serv.gettypelist();
         }
       })    
     });
@@ -82,7 +87,7 @@ isclick = false
 
   // ---------------------------------------Delete Company-------------------------------//
 
-  deleteunits(item:any){
+  deletetype(item:any){
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -93,9 +98,9 @@ isclick = false
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.unitist=this.serv.getunitlist();
-                this.company=item;
-                this.company=this.serv.deleteunit(item).subscribe();
+          this.typelist=this.serv.gettypelist();
+                this.type=item;
+                this.type=this.serv.deletetype(item).subscribe();
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',
@@ -107,5 +112,4 @@ isclick = false
       })
     }
   // -----------------------------------------------------------------------------------------//
-
 }
