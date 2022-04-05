@@ -55,11 +55,12 @@
                                     <div class="col-md-9">
                                         <select id="projectinput7" name="budget" class="form-control"formControlName="item" (change)="change()" >
                                             <option value="0" selected="" disabled="">Choose From Species </option>
-                                            <option [value]="i.sellingPrice" *ngFor="let i of item">{{i.name}} </option>
+                                            <option  [value]="i.sellingPrice" *ngFor="let i of item">{{i.name}} </option>
                                         </select>
                                         <span class="alert alert-danger"*ngIf="(form.get('item')?.touched && form.get('item')?.hasError('required')) || (form.get('item')?.hasError('required') && isclick )">Item Required</span>
                                     </div>
                                 </div>
+
 <!-- ------------------------------------------------------------------------------------------------------------------------- -->
 
                                 <div class="form-group row">
@@ -79,6 +80,7 @@
 
                                     </div>
                                 </div>
+
 <!-- ------------------------------------------------------------------------------------------------------------------------- -->
 
                                 <div class="form-group row">

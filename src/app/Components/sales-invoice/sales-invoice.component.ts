@@ -5,7 +5,6 @@ import { Item } from 'src/app/Models/item';
 import { ClientService } from 'src/app/Services/Client/client.service';
 import { ItemService } from 'src/app/Services/Item/item.service';
 import { SalesInvoiceService } from 'src/app/Services/Sales_Invoice/sales-invoice.service';
-import { TypeService } from 'src/app/Services/Type/type.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -34,6 +33,7 @@ form = new FormGroup({
   'net':new FormControl(null),
   'total':new FormControl(null),
   'rest':new FormControl(null),
+  'rrr':new FormControl(null),
 
 
 })
@@ -52,6 +52,7 @@ category:any;
   net!:number;
   paid!:number;
   rest!:number;
+  restqua:any;
 // ---------------------------------------------------------//
 collection:any;
 Bill: Bill[] = [];
@@ -72,7 +73,6 @@ this.total=0
 this.vdiscount=0
 this.net=0
 this.rest=0;
-
 
 }
 
@@ -103,7 +103,7 @@ cancel(){
       console.log(item)
       this.category=this.saleser.addsale(item).subscribe(()=>{
         Swal.fire({
-          text: "Item Recorded",
+          text: "Bill Recorded",
           icon: 'success',
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'OK'
@@ -170,13 +170,10 @@ cancel(){
                         this.sell=0;
                         this.quatity=1;
                         this.total=0;
-                        this.form.reset();
-                    // this.itemlist=this.itemserv.getitem();
-                          // this.sale=sale;
-                          // this.sale=this.itemserv.deleteitem(item).subscribe();
+                        this.form.reset()
                     Swal.fire(
                       'Added!',
-                      'Your Recorded has been Added.',
+                      'Your Bill has been Added.',
                       'success'
                     )
           
@@ -222,7 +219,7 @@ cancel(){
                 this.ite=this.saleser.deletesale(item).subscribe();
           Swal.fire(
             'Deleted!',
-            'Your Recorded has been deleted.',
+            'Your Bill has been deleted.',
             'success'
           )
           this.saleser.getsale().subscribe(data => this.collection = data);
@@ -253,11 +250,13 @@ show(){
     
   }
 }
+items:Item[]=[]
+rrr:any;
 change(){
 
   this.sell=this.form.value.item;
-  this.total=this.form.value.item*this.form.value.quatity
-        
+  this.total=this.form.value.item*this.form.value.quatity;
+  this.rrr=this.form.get('item.name');
       }
     
     }

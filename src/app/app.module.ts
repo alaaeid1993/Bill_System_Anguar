@@ -17,6 +17,7 @@ import { CompanytypeComponent } from './Components/companytype/companytype/compa
 import { CategoryComponent } from './Components/category/category.component';
 import { TypeforCompanyPipe } from './CustomePipe/typefor-company.pipe';
 import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.component';
+import { ReportComponent } from './Components/report/report.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.
     CompanytypeComponent,
     CategoryComponent,
     TypeforCompanyPipe,
-    SalesInvoiceComponent
+    SalesInvoiceComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

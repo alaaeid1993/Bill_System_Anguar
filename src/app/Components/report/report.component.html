@@ -1,0 +1,32 @@
+<section id="horizontal-form-layouts">
+    <div class="row">
+
+        <table id="table" class="table table-danger" style="text-align: center">
+            <thead >
+              <tr >
+                <th scope="col">Bill Number</th>
+                <th scope="col">Bill Date</th>
+                <th scope="col">The Net</th>
+                <th scope="col">Paid</th> 
+                <th scope="col">Rest</th>
+                <!-- <th scope="col">Total</th>
+                <th scope="col">Paid</th>
+                <th scope="col">Rest</th>-->
+                <th scope="col">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of collection">
+                <td  class="table-info">{{i.id}}</td>
+                <td  class="table-info">{{i.billDate}}</td>
+                <td class="table-info">${{i.theNet}}</td>
+                <td class="table-info">${{i.paidUp}}</td>
+                <td class="table-info">${{i.theRest}}</td>
+                <td  class="table-info"(click)="deletebill(i.id)">
+                    <i class="icon-trash" style="color: brown;cursor: pointer;"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</section>

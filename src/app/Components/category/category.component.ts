@@ -7,6 +7,9 @@ import { TypeService } from 'src/app/Services/Type/type.service';
 import { unitService } from 'src/app/Services/unit/unit.service';
 import Swal from 'sweetalert2';
 import { Type } from 'src/app/Models/type';
+import { Company } from 'src/app/Models/company';
+import { ComType } from 'src/app/Models/com-type';
+
 
 @Component({
   selector: 'app-category',
@@ -147,7 +150,9 @@ cancel(){
       })
     }
 
-
+companymodel:Company[]=[];
+typemodel:Type[]=[];
+companytypemodel:ComType[]=[]
 
 
 

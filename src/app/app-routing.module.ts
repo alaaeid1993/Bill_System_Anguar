@@ -10,6 +10,7 @@ import { ClientComponent } from './Components/client/client.component';
 import { CompanytypeComponent } from './Components/companytype/companytype/companytype.component';
 import { CategoryComponent } from './Components/category/category.component';
 import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.component';
+import { ReportComponent } from './Components/report/report.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,8 @@ const routes: Routes = [
   {path:'companytype',  component:CompanytypeComponent},
   {path:'Category',  component:CategoryComponent},
   {path:'sales',  component:SalesInvoiceComponent},
+  {path:'report',  component:ReportComponent},
+
 
 
 

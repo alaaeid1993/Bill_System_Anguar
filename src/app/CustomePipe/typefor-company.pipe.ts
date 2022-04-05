@@ -1,13 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CompanyType } from '../Models/company-type';
+import { ComType } from '../Models/com-type';
+
 
 @Pipe({
   name: 'typeforCompany'
 })
 export class TypeforCompanyPipe implements PipeTransform {
 
-  transform(companyTypes: CompanyType[], companyId: number) : CompanyType[] {
-    const types: CompanyType[] = []
+  transform(companyTypes: ComType[], companyId: number) : ComType[] {
+    const types: ComType[] = []
     for (let cType of companyTypes) {
       if (cType.companyDataId == companyId)
         types.push(cType)
