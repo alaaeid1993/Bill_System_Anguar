@@ -13,14 +13,13 @@ import Swal from 'sweetalert2';
 export class TypeComponent implements OnInit {
 
  
-  constructor(private serv:TypeService, private comser:CompanyService) { 
+  constructor(private serv:TypeService) { 
     
   }
 
 // --------------------------------------------------Validation--------------------------------------------//
 
 form = new FormGroup({
-  companyvalidate : new FormControl('',Validators.required,),
   spiecevalidate : new FormControl('',Validators.required,),
   notevalidate : new FormControl(null),
 
@@ -31,9 +30,7 @@ isclick = false
   
 // --------------------------------------------------Vars--------------------------------------------//
 typelist!:Observable<any[]>;
-companies:any;
   type:any;
-  companyname:any;
   name:string="";
   notes:string=""
  
@@ -43,12 +40,6 @@ companies:any;
 
   ngOnInit(): void {
     this.typelist=this.serv.gettypelist();
-    this.companyname=this.comser.getcompanylist().subscribe(
-      data => this.companies=data)
-    this.comser.getcompanylist().subscribe(
-      data => this.companies=data
-    )
-    
   }
 
 // ---------------------------------------Cancel Add Company-----------------------------------//
@@ -62,7 +53,6 @@ this.form.reset();
   // ---------------------------------------Add Company-----------------------------------//
   addtype(){
     var type ={
-      companyname:this.companyname,
       name:this.name,
       notes:this.notes
     }

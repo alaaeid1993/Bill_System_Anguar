@@ -1,0 +1,146 @@
+<section id="horizontal-form-layouts">
+                   
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title" id="horz-layout-basic">Categories Form</h4>
+                    </div>
+                    <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
+                </div>
+                <div class="card-body">
+                    <div class="px-3">
+
+                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                        <form class="form form-horizontal" [formGroup]="form">
+                            <!-- -------------------------------------------------------------------------------------------------- -->
+
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="projectinput9">Item Name : </label>
+                                <div class="col-md-9">
+                                    <input type="text" id="projectinput9" class="form-control" name="Type"[(ngModel)]="name" formControlName="name">
+                                    <span class="alert alert-danger"*ngIf="(form.get('name')?.touched && form.get('name')?.hasError('required')) || (form.get('name')?.hasError('required') && isclick )">Item Name required</span>
+                                </div>
+                            </div>
+                              
+                        <!-- -------------------------------------------------------------------------------------------------- -->
+                        <!-- ------------------------------------------------------------------------------------------ -->
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control" for="projectinput7">Company Name: </label>
+                            <div class="col-md-9">
+                                <select id="projectinput7" name="budget" class="form-control" formControlName="comp">
+                                    <option value="0" selected="" disabled="">choose from Companies</option>
+                                    <option [value]="company.id" *ngFor="let company of companys" >{{company.name}}</option>
+                                </select>
+                                <span class="alert alert-danger"*ngIf="(form.get('comp')?.touched && form.get('comp')?.hasError('required')) || (form.get('comp')?.hasError('required') && isclick )">Company name required</span>
+                            
+                            </div>
+                        </div>
+
+
+<!-- ------------------------------------------------------------------------------------------ -->
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control" for="projectinput7">Species Name : </label>
+                            <div class="col-md-9">
+                                <select id="projectinput7" name="budget" class="form-control" formControlName="type">
+                                    <option value="0" selected="" disabled="">choose from Species : </option>
+                                    <option value="{{type.id}}" *ngFor="let type of types">{{type.name}}</option>
+                                </select>
+                                <span class="alert alert-danger"*ngIf="(form.get('type')?.touched && form.get('type')?.hasError('required')) || (form.get('type')?.hasError('required') && isclick )">Type name required</span>
+                            </div>
+                        </div>
+                            <!-- -------------------------------------------------------------------------------------------------- -->
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="projectinput7">Unit Name : </label>
+                                    <div class="col-md-9">
+                                        <select id="projectinput7" name="budget" class="form-control" formControlName="unit">
+                                            <option value="0" selected="" disabled="">choose from Units : </option>
+                                            <option [value]="unit.id" *ngFor="let unit of units">{{unit.name}}</option>
+                                        </select>
+                                        <span class="alert alert-danger"*ngIf="(form.get('unit')?.touched && form.get('unit')?.hasError('required')) || (form.get('unit')?.hasError('required') && isclick )">Unit name required</span>
+                                    </div>
+                                </div>
+                                <!-- -------------------------------------------------------------------------------------------------- -->
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="projectinput9">Quantity : </label>
+                                    <div class="col-md-9">
+                                        <input type="number" id="projectinput9" class="form-control" name="Type"[(ngModel)]="quatity" formControlName="quatity">
+                                        <span class="alert alert-danger"*ngIf="(form.get('quatity')?.touched && form.get('quatity')?.hasError('required')) || (form.get('quatity')?.hasError('required') && isclick )">Quantity Is required</span>
+                                    </div>
+                                </div>
+               <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="projectinput9">selling price:
+                                        : </label>
+                                    <div class="col-md-9">
+                                        <input type="number" id="projectinput9" class="form-control" name="Type" [(ngModel)]="sell" formControlName="sell">
+                                        <span class="alert alert-danger"*ngIf="(form.get('sell')?.touched && form.get('sell')?.hasError('required')) || (form.get('sell')?.hasError('required') && isclick )">Sell Price required</span>
+                                    </div>
+                                </div>
+               <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
+
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="projectinput9">buying Price : </label>
+                                    <div class="col-md-9">
+                                        <input type="number" id="projectinput9" class="form-control" name="Type"[(ngModel)]="buy" formControlName="buy">
+                                        <span class="alert alert-danger"*ngIf="(form.get('buy')?.touched && form.get('buy')?.hasError('required')) || (form.get('buy')?.hasError('required') && isclick )">Buying Price required</span>
+                                    </div>
+                                </div>
+                                  
+                            <!-- -------------------------------------------------------------------------------------------------- -->
+
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="projectinput9">Notes: </label>
+                                <div class="col-md-9">
+                                    <textarea id="projectinput9" rows="5" class="form-control" name="comment"[(ngModel)]="note" formControlName="note"></textarea>
+                                    <!-- <span class="alert alert-danger"*ngIf="(form.get('spiecevalidate')?.touched && form.get('spiecevalidate')?.hasError('required')) || (form.get('spiecevalidate')?.hasError('required') && isclick )">Unit name required</span> -->
+                                </div>
+                            </div>
+                            </form></div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-danger mr-1" (click)="cancel()">
+                                    <i class="icon-trash"></i> Cancel
+                                </button>
+                                <button type="button" class="btn btn-success"(click)="additem()">
+                                    <i class="icon-note"></i> Save
+                                </button>
+                            </div>
+                        
+                    </div>
+                
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+        <!-- ---------------------------------------------- -->
+
+        <table  class="table table-danger" style="text-align: center;">
+            <thead >
+              <tr >
+                <th scope="col">item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Buying Price</th>
+                <th scope="col">Selling Price</th>
+                <th scope="col">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of itemlist|async">
+                <td  class="table-info">{{i.name}}</td>
+                <td  class="table-info">{{i.quantityRest}} piece</td>
+                <td  class="table-info">${{i.buyingPrice}}</td>
+                <td  class="table-info">${{i.sellingPrice}}</td>
+                <td  class="table-info"(click)="deleteitem(i.id)">
+                    <i class="icon-trash" style="color: brown;cursor: pointer;"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    
+    

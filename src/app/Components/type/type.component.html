@@ -5,35 +5,23 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title-wrap bar-success">
-                        <h4 class="card-title" id="horz-layout-basic">Species Data Form</h4>
+                        <h4 class="card-title" id="horz-layout-basic">Type Data Form</h4>
                     </div>
                     <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
                 </div>
                 <div class="card-body">
                     <div class="px-3">
+
                         <form class="form form-horizontal"  [formGroup]="form">
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="projectinput7">Company Name: </label>
-                                <div class="col-md-9">
-                                    <select id="projectinput7" name="budget" class="form-control"[(ngModel)]="companyname" formControlName="companyvalidate">
-                                        <option value="0" selected="" disabled="">choose from Companies</option>
-                                        <option [value]="companies"[value]="company.id" *ngFor="let company of companies">{{company.name}}</option>
-                                    </select>
-                                    <span class="alert alert-danger"*ngIf="(form.get('companyvalidate')?.touched && form.get('companyvalidate')?.hasError('required')) || (form.get('companyvalidate')?.hasError('required') && isclick )">Must Choose Company</span>
-                                </div>
-                            </div>
+
 
                             <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="projectinput9">Species Name : </label>
+                                    <label class="col-md-3 label-control" for="projectinput9">Type Name : </label>
                                     <div class="col-md-9">
                                         <input type="text" id="projectinput9" class="form-control" name="Type"[(ngModel)]="name" formControlName="spiecevalidate">
                                         <span class="alert alert-danger"*ngIf="(form.get('spiecevalidate')?.touched && form.get('spiecevalidate')?.hasError('required')) || (form.get('spiecevalidate')?.hasError('required') && isclick )">Spiece name required</span>
                                     </div>
                                 </div>
-             
-               
-                                    
-                                  
 
                                 <div class="form-group row">
                                     <label class="col-md-3 label-control" for="projectinput9">Notes: </label>
@@ -68,7 +56,6 @@
 <table  class="table table-danger" style="text-align: center;">
     <thead *ngIf="typelist != null">
       <tr >
-        <th scope="col">Company Name</th>
         <th scope="col">Spice Name</th>
         <th scope="col">Notes</th>
         <th scope="col">Option</th>
@@ -76,7 +63,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let i of typelist|async">
-        <td class="table-info">{{i.companyname}}</td>
         <td  class="table-info">{{i.name}}</td>
         <td class="table-info">{{i.notes}}</td>
         <td  class="table-info"(click)="deletetype(i.id)">

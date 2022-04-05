@@ -55,7 +55,6 @@
 <table  class="table table-danger" style="text-align: center;">
     <thead *ngIf="companylist != null">
       <tr >
-        <th scope="col">ID</th>
         <th scope="col">Company Name</th>
         <th scope="col">Notes</th>
         <th scope="col">Option</th>
@@ -63,7 +62,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let i of companylist|async">
-        <td class="table-info">{{i.id}}</td>
         <td  class="table-info">{{i.name}}</td>
         <td class="table-info">{{i.notes}}</td>
         <td  class="table-info"(click)="deletecomp(i.id)">

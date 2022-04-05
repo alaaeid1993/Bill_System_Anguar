@@ -13,6 +13,10 @@ import { TypeComponent } from './Components/type/type.component';
 import { ClientComponent } from './Components/client/client.component';
 import { ClientService } from './Services/Client/client.service';
 import { TypeService } from './Services/Type/type.service';
+import { CompanytypeComponent } from './Components/companytype/companytype/companytype.component';
+import { CategoryComponent } from './Components/category/category.component';
+import { TypeforCompanyPipe } from './CustomePipe/typefor-company.pipe';
+import { SalesInvoiceComponent } from './Components/sales-invoice/sales-invoice.component';
 
 
 @NgModule({
@@ -22,7 +26,11 @@ import { TypeService } from './Services/Type/type.service';
     UnitComponent,
     HomeComponent,
     TypeComponent,
-    ClientComponent
+    ClientComponent,
+    CompanytypeComponent,
+    CategoryComponent,
+    TypeforCompanyPipe,
+    SalesInvoiceComponent
   ],
   imports: [
     BrowserModule,

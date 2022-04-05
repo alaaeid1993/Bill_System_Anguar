@@ -54,7 +54,6 @@
 <table  class="table table-danger" style="text-align: center;">
     <thead *ngIf="unitist != null">
       <tr >
-        <th scope="col">ID</th>
         <th scope="col">Unit Name</th>
         <th scope="col">Notes</th>
         <th scope="col">Option</th>
@@ -62,7 +61,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let i of unitist|async">
-        <td class="table-info">{{i.id}}</td>
         <td  class="table-info">{{i.name}}</td>
         <td class="table-info">{{i.notes}}</td>
         <td  class="table-info"(click)="deleteunits(i.id)">
